@@ -295,7 +295,7 @@
     /* Phone popping up from the bottom of the hero on wide screens */
     .hero-phone { display: none; }
     @media (min-width: 1400px) {
-      .hero-phone { display: block; position: absolute; z-index: 1; bottom: 0; width: 240px; height: auto; left: max(8px, calc((100vw - 1040px) / 4 - 120px)); filter: drop-shadow(0 -10px 30px rgba(60,16,8,0.35)); animation: phone-up 1.8s cubic-bezier(.22,1.15,.36,1) .5s both; }
+      .hero-phone { display: block; position: absolute; z-index: 1; bottom: -70px; width: 240px; height: auto; left: max(8px, calc((100vw - 1040px) / 4 - 120px)); filter: drop-shadow(0 -10px 30px rgba(60,16,8,0.35)); animation: phone-up 1.8s cubic-bezier(.22,1.15,.36,1) .5s both; }
       .hero .wrap { position: relative; z-index: 2; }
     }
     @keyframes phone-up { from { transform: translateY(105%); } to { transform: translateY(0); } }
@@ -330,7 +330,7 @@
 </header>
 
 <div class="hero">
-  <img class="hero-phone" src="hero-phone.webp" width="592" height="1112" alt="Aturservicett app showing plumbers near you with rates and reviews" />
+  <img class="hero-phone" src="role-pick.webp" width="594" height="1234" alt="Aturservicett welcome screen asking whether you need a tradesman or are a tradesman" />
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="hero-top">
