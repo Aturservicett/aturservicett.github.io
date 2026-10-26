@@ -301,6 +301,38 @@
     @keyframes phone-up { from { transform: translateY(105%); } to { transform: translateY(0); } }
     @media (prefers-reduced-motion: reduce) { .hero-phone { animation: none; } }
 
+    /* Waitlist pop-up */
+    .wl { border: none; padding: 0; background: transparent; max-width: 440px; width: calc(100% - 32px); margin: auto; color: var(--navy); }
+    .wl::backdrop { background: rgba(26,24,20,0.55); backdrop-filter: blur(3px); }
+    .wl[open] .wl-card { animation: wl-up .45s cubic-bezier(.22,1.15,.36,1); }
+    @keyframes wl-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .wl-card { position: relative; background: var(--cream); border-radius: 22px; padding: 30px 26px 24px; box-shadow: 0 30px 70px rgba(26,24,20,0.4); border-top: 6px solid var(--red); }
+    .wl-x { position: absolute; top: 12px; right: 14px; width: 34px; height: 34px; border-radius: 50%; border: none; background: transparent; font-size: 26px; line-height: 1; color: #6b645a; cursor: pointer; }
+    .wl-x:hover { background: #ece4d8; }
+    .wl h2 { font-size: 28px; line-height: 1.1; letter-spacing: -0.6px; margin-bottom: 8px; }
+    .wl-sub { font-family: "Fraunces", Georgia, serif; font-size: 16.5px; line-height: 1.5; color: #4a443c; margin-bottom: 20px; }
+    .wl-roles { border: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .wl-roles legend { font-size: 13px; font-weight: 600; color: #6b645a; margin-bottom: 8px; }
+    .wl-roles label { position: relative; cursor: pointer; }
+    .wl-roles input { position: absolute; opacity: 0; }
+    .wl-roles span { display: block; text-align: center; padding: 11px 8px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; font-weight: 700; font-size: 14px; transition: all .15s ease; }
+    .wl-roles input:checked + span { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .wl-roles label:nth-child(3) input:checked + span { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+    .wl-roles input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+    .wl-field { display: block; margin-bottom: 12px; }
+    .wl-field span { display: block; font-size: 13px; font-weight: 600; color: #4a443c; margin-bottom: 5px; }
+    .wl-field em { font-style: normal; font-weight: 400; color: #8a8378; }
+    .wl-field input { width: 100%; font: inherit; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; color: var(--navy); }
+    .wl-field input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(196,77,58,0.18); }
+    .wl-err { color: #a3321f; font-size: 14px; font-weight: 600; margin: -2px 0 10px; }
+    .wl-go { width: 100%; background: var(--red); color: #fff; border: none; cursor: pointer; font-family: inherit; font-size: 16px; margin-top: 4px; }
+    .wl-go[disabled] { opacity: .65; cursor: progress; }
+    .wl-fine { font-size: 12.5px; color: #7a7368; margin-top: 12px; line-height: 1.5; }
+    .wl-done { text-align: center; padding: 10px 4px 2px; }
+    .wl-done p { font-family: "Fraunces", Georgia, serif; font-size: 17px; color: #4a443c; margin: 6px 0 20px; }
+    .wl-tick { width: 64px; height: 64px; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .wl-tick svg { width: 34px; height: 34px; }
+
     @media (max-width: 820px) {
       nav { display: none; }
       .hero { padding: 52px 0 64px; }
@@ -347,7 +379,7 @@
       </div>
       <p class="lead">Aturservicett lists skilled tradesmen across Trinidad and Tobago. Compare rates and photos of past work, then message them <em>straight on WhatsApp</em>.</p>
       <div class="ctas">
-        <a class="btn btn-primary" href="mailto:support@aturservicett.com?subject=Notify%20me%20when%20Aturservicett%20launches&amp;body=Hi%20Aturservicett%20team%2C%0A%0APlease%20let%20me%20know%20when%20the%20app%20is%20available.%0A%0AName%3A%0AArea%3A">Notify me at launch</a>
+        <a class="btn btn-primary" href="#waitlist" data-waitlist="client">Notify me at launch</a>
         <a class="btn btn-ghost" href="#tradesmen">I'm a tradesman</a>
       </div>
       <p class="stores">Coming soon on Google Play and the App Store</p>
@@ -390,7 +422,7 @@
         <li><span class="perk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9Z"/></svg></span><div><h3>Reviews from clients</h3><p>Read what other people in T&amp;T say after the job is finished.</p></div></li>
         <li><span class="perk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/></svg></span><div><h3>You deal with them directly</h3><p>Chat on WhatsApp and agree the price and payment between you. Aturservicett doesn&rsquo;t handle payments.</p></div></li>
       </ul>
-      <a class="btn btn-gold" href="mailto:support@aturservicett.com?subject=Notify%20me%20when%20Aturservicett%20launches&amp;body=Hi%20Aturservicett%20team%2C%0A%0APlease%20let%20me%20know%20when%20the%20app%20is%20available.%0A%0AName%3A%0AArea%3A">Notify me at launch</a>
+      <a class="btn btn-gold" href="#waitlist" data-waitlist="client">Notify me at launch</a>
     </div>
     <div class="app-shot">
       <span class="sample">App preview</span>
@@ -444,7 +476,7 @@
         <li>Build your reputation with client ratings and reviews</li>
         <li>Clients contact you directly on WhatsApp</li>
       </ul>
-      <a class="btn btn-primary" href="mailto:support@aturservicett.com?subject=I%20want%20to%20join%20Aturservicett%20as%20a%20tradesman&amp;body=Hi%20Aturservicett%20team%2C%0A%0AI%27d%20like%20to%20join%20as%20a%20tradesman.%0A%0AName%3A%0ATrade%3A%0AArea%3A%0AWhatsApp%20number%3A">Join as a tradesman</a>
+      <a class="btn btn-primary" href="#waitlist" data-waitlist="tradesman">Join as a tradesman</a>
     </div>
     <div class="card-dark">
       <h3>Your service area</h3>
@@ -482,7 +514,7 @@
     <div class="final">
       <h2>Be first to know when we launch</h2>
       <p>Aturservicett is coming soon to Google Play and the App Store. Send us a note and we'll let you know the moment it's live.</p>
-      <a class="btn" href="mailto:support@aturservicett.com?subject=Notify%20me%20when%20Aturservicett%20launches&amp;body=Hi%20Aturservicett%20team%2C%0A%0APlease%20let%20me%20know%20when%20the%20app%20is%20available.%0A%0AName%3A%0AArea%3A">Notify me at launch</a>
+      <a class="btn" href="#waitlist" data-waitlist="client">Notify me at launch</a>
     </div>
   </div>
 </section>
@@ -566,6 +598,73 @@
   }
   build();
   var t; window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(build, 200); });
+})();
+</script>
+
+<dialog class="wl" id="waitlist" aria-labelledby="wl-title">
+  <form class="wl-card" id="wl-form" novalidate>
+    <button type="button" class="wl-x" data-close aria-label="Close">&times;</button>
+    <div class="wl-body">
+      <h2 id="wl-title">Be first when we launch</h2>
+      <p class="wl-sub">Join the Aturservicett waitlist and we&rsquo;ll email you the moment the app is live on Google Play and the App Store.</p>
+      <fieldset class="wl-roles">
+        <legend>I&rsquo;m joining as</legend>
+        <label><input type="radio" name="role" value="client" checked /><span>I need a tradesman</span></label>
+        <label><input type="radio" name="role" value="tradesman" /><span>I am a tradesman</span></label>
+      </fieldset>
+      <label class="wl-field"><span>First name <em>(optional)</em></span><input type="text" name="first_name" autocomplete="given-name" maxlength="60" /></label>
+      <label class="wl-field"><span>Email</span><input type="email" name="email" autocomplete="email" required placeholder="you@example.com" /></label>
+      <p class="wl-err" id="wl-err" role="alert" hidden></p>
+      <button type="submit" class="btn wl-go">Notify me at launch</button>
+      <p class="wl-fine">You&rsquo;ll get a quick email to confirm. We only send launch news and occasional updates, and you can unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
+    </div>
+    <div class="wl-done" hidden>
+      <div class="wl-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17l9-10"/></svg></div>
+      <h2>Almost there!</h2>
+      <p>Check your inbox for a confirmation email from Aturservicett and tap the link to secure your spot.</p>
+      <button type="button" class="btn wl-go" data-close>Done</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  var KLAVIYO_PUBLIC_KEY = "YuCLbq", LIST_ID = "V67vTX";
+  var dlg = document.getElementById("waitlist"), form = document.getElementById("wl-form");
+  if (!dlg || !form) return;
+  var body = form.querySelector(".wl-body"), done = form.querySelector(".wl-done"), err = document.getElementById("wl-err"), go = form.querySelector('button[type="submit"]');
+  function open(role) {
+    body.hidden = false; done.hidden = true; err.hidden = true; go.disabled = false; go.textContent = "Notify me at launch";
+    var r = form.querySelector('input[name="role"][value="' + (role || "client") + '"]'); if (r) r.checked = true;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    setTimeout(function () { form.email.focus(); }, 60);
+  }
+  function close() { if (dlg.close) dlg.close(); else dlg.removeAttribute("open"); }
+  document.querySelectorAll("[data-waitlist]").forEach(function (b) {
+    b.addEventListener("click", function (e) { e.preventDefault(); open(b.getAttribute("data-waitlist")); });
+  });
+  form.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", close); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = form.email.value.trim(), first = form.first_name.value.trim();
+    var role = (form.querySelector('input[name="role"]:checked') || {}).value || "client";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { err.textContent = "Please enter a valid email address."; err.hidden = false; form.email.focus(); return; }
+    err.hidden = true; go.disabled = true; go.textContent = "Joining\u2026";
+    var attrs = { email: email, properties: { role: role === "tradesman" ? "Tradesman" : "Client", signup_source: "aturservicett.com" } };
+    if (first) attrs.first_name = first;
+    fetch("https://a.klaviyo.com/client/subscriptions?company_id=" + KLAVIYO_PUBLIC_KEY, {
+      method: "POST",
+      headers: { "Content-Type": "application/vnd.api+json", "revision": "2024-10-15" },
+      body: JSON.stringify({ data: { type: "subscription", attributes: { custom_source: "Website waitlist", profile: { data: { type: "profile", attributes: attrs } } }, relationships: { list: { data: { type: "list", id: LIST_ID } } } } })
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      body.hidden = true; done.hidden = false;
+    }).catch(function () {
+      err.textContent = "Something went wrong. Please try again in a moment."; err.hidden = false;
+      go.disabled = false; go.textContent = "Notify me at launch";
+    });
+  });
 })();
 </script>
 </body>
